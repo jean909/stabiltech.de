@@ -142,7 +142,23 @@
     "title": "Tehnologii pe care le folosim",
     "hint": "Apasă pe o tehnologie pentru a afla cum o folosim",
     "selectHint": "Selectează o tehnologie pentru detalii",
-    "useCases": "Cazuri de utilizare"
+    "useCases": "Cazuri de utilizare",
+    "tech": {
+      "react": { "name": "React", "category": "Frontend", "desc": "Bibliotecă JavaScript pentru interfețe utilizator. Folosim React în toate aplicațiile web.", "useCase": "Aplicații web, panouri, SPA-uri, interfețe interactive" },
+      "python": { "name": "Python", "category": "Backend", "desc": "Limbaj versatil pentru backend, automatizare și date. Alegerea noastră pentru Odoo și scripturi.", "useCase": "Module Odoo, API-uri, automatizare, procesare date" },
+      "flutter": { "name": "Flutter", "category": "Mobile", "desc": "Toolkit Google pentru aplicații mobile cross-platform. Un singur cod pentru iOS și Android.", "useCase": "Aplicații mobile cross-platform, MVP-uri, prototipuri" },
+      "docker": { "name": "Docker", "category": "DevOps", "desc": "Containerizare pentru deploy-uri consistente. Fiecare proiect rulează în medii izolate.", "useCase": "Deploy, CI/CD, development local, scalare" },
+      "aws": { "name": "AWS", "category": "Cloud", "desc": "Amazon Web Services pentru infrastructură cloud fiabilă și scalabilă.", "useCase": "Hosting, S3, Lambda, baze de date RDS" },
+      "odoo": { "name": "Odoo", "category": "ERP", "desc": "Sistem ERP open-source. Suntem parteneri pentru implementare și personalizare.", "useCase": "ERP, CRM, inventar, contabilitate, HR" },
+      "nextjs": { "name": "Next.js", "category": "Framework", "desc": "Framework React pentru producție. Server-side rendering, generare statică, API routes.", "useCase": "Site-uri corporative, e-commerce, platforme SaaS" },
+      "nodejs": { "name": "Node.js", "category": "Backend", "desc": "Runtime JavaScript pentru server. Servicii backend rapide și scalabile.", "useCase": "API-uri REST, aplicații real-time, microservicii" },
+      "tailwind": { "name": "Tailwind CSS", "category": "Styling", "desc": "Framework CSS utility-first pentru UI rapid, fără a părăsi HTML-ul.", "useCase": "Toate proiectele web, design responsive, teme" },
+      "kotlin": { "name": "Kotlin", "category": "Mobile", "desc": "Limbaj modern pentru Android. Concis, sigur, interoperabil cu Java.", "useCase": "Aplicații Android native, servicii backend" },
+      "typescript": { "name": "TypeScript", "category": "Language", "desc": "JavaScript tipizat pentru aplicații la scară. Folosim TypeScript în fiecare proiect.", "useCase": "Proiecte frontend și backend JS/TS" },
+      "swift": { "name": "Swift", "category": "Mobile", "desc": "Limbajul Apple pentru iOS, macOS și nu numai. Rapid, modern, sigur.", "useCase": "Aplicații iOS native, watchOS, macOS" },
+      "postgresql": { "name": "PostgreSQL", "category": "Database", "desc": "Cea mai avansată bază de date relatională open-source.", "useCase": "Proiecte cu stocare relatională" },
+      "git": { "name": "Git", "category": "Tooling", "desc": "Control versiuni pentru fiecare proiect. Branching și code review.", "useCase": "Toate proiectele, CI/CD, colaborare" }
+    }
   },
   "menu": {
     "mobileApps": "Aplicații mobile",

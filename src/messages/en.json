@@ -142,7 +142,23 @@
     "title": "Technologies We Use",
     "hint": "Click any technology to learn how we use it",
     "selectHint": "Select a technology to see details",
-    "useCases": "Use cases"
+    "useCases": "Use cases",
+    "tech": {
+      "react": { "name": "React", "category": "Frontend", "desc": "A JavaScript library for building user interfaces. We use React for all our web applications.", "useCase": "Web apps, dashboards, SPAs, interactive UIs" },
+      "python": { "name": "Python", "category": "Backend", "desc": "Versatile language for backend, automation, and data. Our go-to for Odoo development and scripting.", "useCase": "Odoo modules, APIs, automation, data processing" },
+      "flutter": { "name": "Flutter", "category": "Mobile", "desc": "Google's UI toolkit for cross-platform mobile apps. One codebase for iOS and Android.", "useCase": "Cross-platform mobile apps, MVPs, prototypes" },
+      "docker": { "name": "Docker", "category": "DevOps", "desc": "Containerization for consistent deployments. Every project runs in isolated environments.", "useCase": "Deployment, CI/CD, local development, scaling" },
+      "aws": { "name": "AWS", "category": "Cloud", "desc": "Amazon Web Services for reliable, scalable cloud infrastructure.", "useCase": "Hosting, S3 storage, Lambda, RDS databases" },
+      "odoo": { "name": "Odoo", "category": "ERP", "desc": "Open-source ERP system. We are certified partners for implementation and customization.", "useCase": "ERP, CRM, inventory, accounting, HR" },
+      "nextjs": { "name": "Next.js", "category": "Framework", "desc": "The React framework for production. Server-side rendering, static generation, and API routes.", "useCase": "Corporate sites, e-commerce, SaaS platforms" },
+      "nodejs": { "name": "Node.js", "category": "Backend", "desc": "JavaScript runtime for server-side development. Fast, scalable backend services.", "useCase": "REST APIs, real-time apps, microservices" },
+      "tailwind": { "name": "Tailwind CSS", "category": "Styling", "desc": "Utility-first CSS framework for rapid UI development without leaving your HTML.", "useCase": "All web projects, responsive design, theming" },
+      "kotlin": { "name": "Kotlin", "category": "Mobile", "desc": "Modern language for Android development. Concise, safe, and fully interoperable with Java.", "useCase": "Native Android apps, backend services" },
+      "typescript": { "name": "TypeScript", "category": "Language", "desc": "Typed JavaScript for large-scale applications. We use TypeScript on every project.", "useCase": "All frontend & backend JS/TS projects" },
+      "swift": { "name": "Swift", "category": "Mobile", "desc": "Apple's language for iOS, macOS, and beyond. Fast, modern, and safe.", "useCase": "Native iOS apps, watchOS, macOS apps" },
+      "postgresql": { "name": "PostgreSQL", "category": "Database", "desc": "The world's most advanced open-source relational database.", "useCase": "All projects requiring relational data storage" },
+      "git": { "name": "Git", "category": "Tooling", "desc": "Version control for every project. Clean branching strategies and code reviews.", "useCase": "All projects, CI/CD pipelines, collaboration" }
+    }
   },
   "menu": {
     "mobileApps": "Mobile Apps",

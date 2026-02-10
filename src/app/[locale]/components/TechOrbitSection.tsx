@@ -1,6 +1,6 @@
 /**
  * TechOrbitSection - Interactive orbiting tech icons.
- * Click any icon to expand details about that technology.
+ * Content (name, category, desc, useCase) comes from translations (techOrbit.tech.*).
  */
 'use client';
 
@@ -11,68 +11,33 @@ import { X } from 'lucide-react';
 import {
   SiReact, SiNextdotjs, SiTypescript, SiPython, SiFlutter,
   SiNodedotjs, SiDocker, SiKotlin, SiSwift, SiPostgresql,
-  SiTailwindcss, SiGit, SiOdoo, SiAndroid, SiApple, SiAmazon
+  SiTailwindcss, SiGit, SiOdoo, SiAmazon
 } from 'react-icons/si';
 
-interface TechItem {
-  id: string;
-  Icon: any;
-  name: string;
-  category: string;
-  description: string;
-  useCase: string;
-  orbit: number; // 0=outer, 1=mid, 2=inner
-  offset: number; // degrees
+type TechId = 'react' | 'python' | 'flutter' | 'docker' | 'aws' | 'odoo' | 'nextjs' | 'nodejs' | 'tailwind' | 'kotlin' | 'typescript' | 'swift' | 'postgresql' | 'git';
+
+interface TechDef {
+  id: TechId;
+  Icon: React.ComponentType<{ className?: string }>;
+  orbit: number;
+  offset: number;
 }
 
-const techItems: TechItem[] = [
-  // Orbit 0 - outer
-  { id: 'react', Icon: SiReact, name: 'React', category: 'Frontend', orbit: 0, offset: 0,
-    description: 'A JavaScript library for building user interfaces. We use React for all our web applications.',
-    useCase: 'Web apps, dashboards, SPAs, interactive UIs' },
-  { id: 'python', Icon: SiPython, name: 'Python', category: 'Backend', orbit: 0, offset: 60,
-    description: 'Versatile language for backend, automation, and data. Our go-to for Odoo development and scripting.',
-    useCase: 'Odoo modules, APIs, automation, data processing' },
-  { id: 'flutter', Icon: SiFlutter, name: 'Flutter', category: 'Mobile', orbit: 0, offset: 120,
-    description: 'Google\'s UI toolkit for cross-platform mobile apps. One codebase for iOS and Android.',
-    useCase: 'Cross-platform mobile apps, MVPs, prototypes' },
-  { id: 'docker', Icon: SiDocker, name: 'Docker', category: 'DevOps', orbit: 0, offset: 180,
-    description: 'Containerization for consistent deployments. Every project runs in isolated environments.',
-    useCase: 'Deployment, CI/CD, local development, scaling' },
-  { id: 'aws', Icon: SiAmazon, name: 'AWS', category: 'Cloud', orbit: 0, offset: 240,
-    description: 'Amazon Web Services for reliable, scalable cloud infrastructure.',
-    useCase: 'Hosting, S3 storage, Lambda, RDS databases' },
-  { id: 'odoo', Icon: SiOdoo, name: 'Odoo', category: 'ERP', orbit: 0, offset: 300,
-    description: 'Open-source ERP system. We are certified partners for implementation and customization.',
-    useCase: 'ERP, CRM, inventory, accounting, HR' },
-
-  // Orbit 1 - middle
-  { id: 'nextjs', Icon: SiNextdotjs, name: 'Next.js', category: 'Framework', orbit: 1, offset: 30,
-    description: 'The React framework for production. Server-side rendering, static generation, and API routes.',
-    useCase: 'Corporate sites, e-commerce, SaaS platforms' },
-  { id: 'nodejs', Icon: SiNodedotjs, name: 'Node.js', category: 'Backend', orbit: 1, offset: 120,
-    description: 'JavaScript runtime for server-side development. Fast, scalable backend services.',
-    useCase: 'REST APIs, real-time apps, microservices' },
-  { id: 'tailwind', Icon: SiTailwindcss, name: 'Tailwind CSS', category: 'Styling', orbit: 1, offset: 210,
-    description: 'Utility-first CSS framework for rapid UI development without leaving your HTML.',
-    useCase: 'All web projects, responsive design, theming' },
-  { id: 'kotlin', Icon: SiKotlin, name: 'Kotlin', category: 'Mobile', orbit: 1, offset: 300,
-    description: 'Modern language for Android development. Concise, safe, and fully interoperable with Java.',
-    useCase: 'Native Android apps, backend services' },
-
-  // Orbit 2 - inner
-  { id: 'typescript', Icon: SiTypescript, name: 'TypeScript', category: 'Language', orbit: 2, offset: 0,
-    description: 'Typed JavaScript for large-scale applications. We use TypeScript on every project.',
-    useCase: 'All frontend & backend JS/TS projects' },
-  { id: 'swift', Icon: SiSwift, name: 'Swift', category: 'Mobile', orbit: 2, offset: 90,
-    description: 'Apple\'s language for iOS, macOS, and beyond. Fast, modern, and safe.',
-    useCase: 'Native iOS apps, watchOS, macOS apps' },
-  { id: 'postgresql', Icon: SiPostgresql, name: 'PostgreSQL', category: 'Database', orbit: 2, offset: 180,
-    description: 'The world\'s most advanced open-source relational database.',
-    useCase: 'All projects requiring relational data storage' },
-  { id: 'git', Icon: SiGit, name: 'Git', category: 'Tooling', orbit: 2, offset: 270,
-    description: 'Version control for every project. Clean branching strategies and code reviews.',
-    useCase: 'All projects, CI/CD pipelines, collaboration' },
+const techDefs: TechDef[] = [
+  { id: 'react', Icon: SiReact, orbit: 0, offset: 0 },
+  { id: 'python', Icon: SiPython, orbit: 0, offset: 60 },
+  { id: 'flutter', Icon: SiFlutter, orbit: 0, offset: 120 },
+  { id: 'docker', Icon: SiDocker, orbit: 0, offset: 180 },
+  { id: 'aws', Icon: SiAmazon, orbit: 0, offset: 240 },
+  { id: 'odoo', Icon: SiOdoo, orbit: 0, offset: 300 },
+  { id: 'nextjs', Icon: SiNextdotjs, orbit: 1, offset: 30 },
+  { id: 'nodejs', Icon: SiNodedotjs, orbit: 1, offset: 120 },
+  { id: 'tailwind', Icon: SiTailwindcss, orbit: 1, offset: 210 },
+  { id: 'kotlin', Icon: SiKotlin, orbit: 1, offset: 300 },
+  { id: 'typescript', Icon: SiTypescript, orbit: 2, offset: 0 },
+  { id: 'swift', Icon: SiSwift, orbit: 2, offset: 90 },
+  { id: 'postgresql', Icon: SiPostgresql, orbit: 2, offset: 180 },
+  { id: 'git', Icon: SiGit, orbit: 2, offset: 270 },
 ];
 
 const orbitConfig = [
@@ -83,7 +48,7 @@ const orbitConfig = [
 
 export function TechOrbitSection() {
   const t = useTranslations('techOrbit');
-  const [selected, setSelected] = useState<TechItem | null>(null);
+  const [selected, setSelected] = useState<TechDef | null>(null);
   const [paused, setPaused] = useState(false);
 
   return (
@@ -120,7 +85,7 @@ export function TechOrbitSection() {
             </div>
 
             {/* Orbiting icons */}
-            {techItems.map((tech) => {
+            {techDefs.map((tech) => {
               const orbit = orbitConfig[tech.orbit];
               const dur = orbit.duration;
               const dir = orbit.direction;
@@ -136,6 +101,7 @@ export function TechOrbitSection() {
                   <motion.button
                     onClick={() => { setSelected(tech); setPaused(true); }}
                     className={`pointer-events-auto absolute left-1/2 -translate-x-1/2 -top-6 ${orbit.iconSize} bg-black border border-neutral-700 rounded-xl flex items-center justify-center hover:border-white hover:bg-neutral-900 transition-colors cursor-pointer z-10 ${selected?.id === tech.id ? 'border-white bg-neutral-800' : ''}`}
+                    aria-label={t(`tech.${tech.id}.name`)}
                     animate={paused ? {} : { rotate: -360 * dir }}
                     transition={{ duration: dur, repeat: Infinity, ease: 'linear' }}
                     style={{ rotate: -tech.offset }}
@@ -175,18 +141,18 @@ export function TechOrbitSection() {
                         <selected.Icon className="w-7 h-7 text-white" />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold text-white">{selected.name}</h3>
-                        <span className="text-xs uppercase tracking-wider text-neutral-500 font-medium">{selected.category}</span>
+                        <h3 className="text-2xl font-bold text-white">{t(`tech.${selected.id}.name`)}</h3>
+                        <span className="text-xs uppercase tracking-wider text-neutral-500 font-medium">{t(`tech.${selected.id}.category`)}</span>
                       </div>
                     </div>
 
                     {/* Description */}
-                    <p className="text-neutral-300 leading-relaxed mb-6">{selected.description}</p>
+                    <p className="text-neutral-300 leading-relaxed mb-6">{t(`tech.${selected.id}.desc`)}</p>
 
                     {/* Use case */}
                     <div className="bg-neutral-900 rounded-xl p-4 border border-neutral-800">
                       <p className="text-xs uppercase tracking-wider text-neutral-500 font-medium mb-2">{t('useCases')}</p>
-                      <p className="text-neutral-300 text-sm">{selected.useCase}</p>
+                      <p className="text-neutral-300 text-sm">{t(`tech.${selected.id}.useCase`)}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -202,13 +168,13 @@ export function TechOrbitSection() {
                       ← {t('selectHint')}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-6">
-                      {techItems.map(t => (
+                      {techDefs.map((def) => (
                         <button
-                          key={t.id}
-                          onClick={() => { setSelected(t); setPaused(true); }}
+                          key={def.id}
+                          onClick={() => { setSelected(def); setPaused(true); }}
                           className="text-xs text-neutral-500 border border-neutral-800 px-3 py-1.5 rounded-lg hover:text-white hover:border-neutral-600 transition-colors"
                         >
-                          {t.name}
+                          {t(`tech.${def.id}.name`)}
                         </button>
                       ))}
                     </div>
