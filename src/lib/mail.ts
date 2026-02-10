@@ -1,27 +1,71 @@
 /**
  * Email utilities for StabilTech
- * 
- * Shared SMTP transporter and email template helpers.
+ *
+ * Uses Resend when RESEND_API_KEY is set, otherwise SMTP (Nodemailer).
  * Used by /api/contact and /api/apply routes.
  */
 
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 /* ── Constants ──────────────────────────────────────────────── */
 
 export const CONTACT_EMAIL = 'info@stabiltech.de';
 export const CAREERS_EMAIL = 'moise.ioan@stabiltech.de';
 
-/* ── SMTP Transporter ───────────────────────────────────────── */
+/* ── Send email (Resend or SMTP) ──────────────────────────────── */
 
-/** Creates a reusable SMTP transporter from env variables */
+export type SendEmailOptions = {
+  from: string;
+  to: string | string[];
+  replyTo?: string;
+  subject: string;
+  html: string;
+};
+
+/** Sends an email via Resend (if API key set) or SMTP */
+export async function sendEmail(options: SendEmailOptions): Promise<void> {
+  const to = Array.isArray(options.to) ? options.to : [options.to];
+
+  if (process.env.RESEND_API_KEY) {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    const { error } = await resend.emails.send({
+      from: options.from,
+      to,
+      replyTo: options.replyTo,
+      subject: options.subject,
+      html: options.html,
+    });
+    if (error) throw new Error(error.message);
+    return;
+  }
+
+  const transporter = createTransporter();
+  await transporter.sendMail({
+    from: options.from,
+    to: options.to,
+    replyTo: options.replyTo,
+    subject: options.subject,
+    html: options.html,
+  });
+}
+
+/** Build "from" string for Resend (verified domain) or SMTP */
+export function fromAddress(displayName: string): string {
+  if (process.env.RESEND_API_KEY) {
+    return `${displayName} <${CONTACT_EMAIL}>`;
+  }
+  return `"${displayName}" <${process.env.SMTP_USER}>`;
+}
+
+/* ── SMTP Transporter (fallback when no Resend key) ──────────── */
+
 export function createTransporter() {
   const port = Number(process.env.SMTP_PORT) || 465;
-
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST || 'mail.privateemail.com',
     port,
-    secure: port === 465, // SSL for 465, STARTTLS for 587
+    secure: port === 465,
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,

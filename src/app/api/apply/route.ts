@@ -9,7 +9,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createTransporter, emailLayout, dataTable, tableRow, messageBlock, confirmationBody } from '@/lib/mail';
+import { sendEmail, fromAddress, emailLayout, dataTable, tableRow, messageBlock, confirmationBody } from '@/lib/mail';
 import { CAREERS_EMAIL } from '@/lib/constants';
 
 const applySchema = z.object({
@@ -28,11 +28,10 @@ export async function POST(request: NextRequest) {
     const data = applySchema.parse(body);
 
     /* ── Send Emails ── */
-    const transporter = createTransporter();
 
     // Application to hiring manager
-    await transporter.sendMail({
-      from: `"StabilTech Careers" <${process.env.SMTP_USER}>`,
+    await sendEmail({
+      from: fromAddress('StabilTech Careers'),
       to: CAREERS_EMAIL,
       replyTo: data.email,
       subject: `Bewerbung: ${data.position} - ${data.name}`,
@@ -50,8 +49,8 @@ export async function POST(request: NextRequest) {
     });
 
     // Confirmation to applicant
-    await transporter.sendMail({
-      from: `"StabilTech" <${process.env.SMTP_USER}>`,
+    await sendEmail({
+      from: fromAddress('StabilTech'),
       to: data.email,
       subject: `Bewerbung erhalten - ${data.position}`,
       html: emailLayout(

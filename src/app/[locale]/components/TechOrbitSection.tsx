@@ -5,6 +5,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import {
@@ -81,6 +82,7 @@ const orbitConfig = [
 ];
 
 export function TechOrbitSection() {
+  const t = useTranslations('techOrbit');
   const [selected, setSelected] = useState<TechItem | null>(null);
   const [paused, setPaused] = useState(false);
 
@@ -92,9 +94,9 @@ export function TechOrbitSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} className="text-center mb-16">
-          <p className="text-neutral-500 uppercase tracking-[0.3em] text-xs font-medium mb-4">Tech Stack</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Technologies We Use</h2>
-          <p className="text-neutral-400 text-lg max-w-xl mx-auto">Click any technology to learn how we use it</p>
+          <p className="text-neutral-500 uppercase tracking-[0.3em] text-xs font-medium mb-4">{t('subtitle')}</p>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">{t('title')}</h2>
+          <p className="text-neutral-400 text-lg max-w-xl mx-auto">{t('hint')}</p>
         </motion.div>
 
         <div className="flex flex-col lg:flex-row items-center gap-12 max-w-6xl mx-auto">
@@ -183,7 +185,7 @@ export function TechOrbitSection() {
 
                     {/* Use case */}
                     <div className="bg-neutral-900 rounded-xl p-4 border border-neutral-800">
-                      <p className="text-xs uppercase tracking-wider text-neutral-500 font-medium mb-2">Use cases</p>
+                      <p className="text-xs uppercase tracking-wider text-neutral-500 font-medium mb-2">{t('useCases')}</p>
                       <p className="text-neutral-300 text-sm">{selected.useCase}</p>
                     </div>
                   </div>
@@ -197,7 +199,7 @@ export function TechOrbitSection() {
                 >
                   <div className="border border-dashed border-neutral-800 rounded-2xl p-12 flex flex-col items-center lg:items-start">
                     <p className="text-neutral-600 text-lg">
-                      ← Select a technology to see details
+                      ← {t('selectHint')}
                     </p>
                     <div className="flex flex-wrap gap-2 mt-6">
                       {techItems.map(t => (

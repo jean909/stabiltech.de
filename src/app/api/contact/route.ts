@@ -10,7 +10,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createTransporter, emailLayout, dataTable, tableRow, messageBlock, confirmationBody } from '@/lib/mail';
+import { sendEmail, fromAddress, emailLayout, dataTable, tableRow, messageBlock, confirmationBody } from '@/lib/mail';
 import { checkRateLimit } from '@/lib/rate-limit';
 import { CONTACT_EMAIL, SERVICE_LABELS } from '@/lib/constants';
 
@@ -36,11 +36,10 @@ export async function POST(request: NextRequest) {
     const serviceText = data.service ? (SERVICE_LABELS[data.service] || data.service) : 'Not specified';
 
     /* ── Send Emails ── */
-    const transporter = createTransporter();
 
     // Notification to StabilTech
-    await transporter.sendMail({
-      from: `"StabilTech Website" <${process.env.SMTP_USER}>`,
+    await sendEmail({
+      from: fromAddress('StabilTech Website'),
       to: CONTACT_EMAIL,
       replyTo: data.email,
       subject: `New Inquiry from ${data.name} - ${serviceText}`,
@@ -57,8 +56,8 @@ export async function POST(request: NextRequest) {
     });
 
     // Confirmation to client
-    await transporter.sendMail({
-      from: `"StabilTech" <${process.env.SMTP_USER}>`,
+    await sendEmail({
+      from: fromAddress('StabilTech'),
       to: data.email,
       subject: 'Thank you for contacting StabilTech',
       html: emailLayout(

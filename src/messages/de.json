@@ -118,7 +118,8 @@
     "tagline": "Unsere Expertise",
     "title": "Technische Exzellenz",
     "description": "Jahrelange Erfahrung kombiniert mit modernster Technologie für herausragende Ergebnisse.",
-    "visual": "Experten-Entwicklung"
+    "visual": "Experten-Entwicklung",
+    "uiDesign": "UI/UX Design"
   },
   "process": {
     "tagline": "Wie wir arbeiten",
@@ -135,6 +136,13 @@
   "testimonials": {
     "tagline": "Kundenstimmen",
     "title": "Was Kunden sagen"
+  },
+  "techOrbit": {
+    "subtitle": "Tech Stack",
+    "title": "Technologien, die wir nutzen",
+    "hint": "Klicken Sie auf eine Technologie, um mehr zu erfahren",
+    "selectHint": "Wählen Sie eine Technologie für Details",
+    "useCases": "Einsatzbereiche"
   },
   "menu": {
     "mobileApps": "Mobile Apps",

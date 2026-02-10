@@ -1,11 +1,14 @@
 /**
  * SkillsSection - Animated skill bars with visual element.
+ * Background cycles through technologies we use.
  */
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+
+const TECH_BACKGROUND = ['React', 'Next.js', 'TypeScript', 'Flutter', 'Odoo', 'Node.js', 'PostgreSQL', 'Docker'];
 
 function SkillBar({ name, percentage, delay }: { name: string; percentage: number; delay: number }) {
   const ref = useRef(null);
@@ -30,23 +33,44 @@ function SkillBar({ name, percentage, delay }: { name: string; percentage: numbe
 export function SkillsSection() {
   const t = useTranslations('skills');
   const tSvc = useTranslations('services');
+  const [techIndex, setTechIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setTechIndex((i) => (i + 1) % TECH_BACKGROUND.length), 2500);
+    return () => clearInterval(id);
+  }, []);
 
   const skills = [
     { name: tSvc('web.title'),        percentage: 95 },
     { name: tSvc('mobile.title'),     percentage: 90 },
     { name: tSvc('erp.title'),        percentage: 88 },
     { name: tSvc('seo.title'),        percentage: 92 },
-    { name: 'UI/UX Design',          percentage: 85 },
+    { name: t('uiDesign'),           percentage: 85 },
   ];
 
   return (
     <section className="py-20 md:py-28 bg-neutral-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-          {/* Visual */}
+          {/* Visual: rotating tech background + expert message */}
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
             <div className="aspect-square bg-black rounded-2xl flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:40px_40px]" />
+              {/* Rotating tech names as background */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:40px_40px]" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={techIndex}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 0.15, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.1 }}
+                    transition={{ duration: 0.5 }}
+                    className="text-6xl md:text-7xl font-bold text-white select-none pointer-events-none"
+                  >
+                    {TECH_BACKGROUND[techIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
               <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 4, repeat: Infinity }}
                 className="relative z-10 text-center">
                 <div className="text-8xl font-bold text-white mb-4">&lt;/&gt;</div>

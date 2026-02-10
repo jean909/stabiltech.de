@@ -118,7 +118,8 @@
     "tagline": "Our Expertise",
     "title": "Technical Excellence",
     "description": "Years of experience combined with cutting-edge technology deliver exceptional results.",
-    "visual": "Expert Development"
+    "visual": "Expert Development",
+    "uiDesign": "UI/UX Design"
   },
   "process": {
     "tagline": "How We Work",
@@ -135,6 +136,13 @@
   "testimonials": {
     "tagline": "Testimonials",
     "title": "What Clients Say"
+  },
+  "techOrbit": {
+    "subtitle": "Tech Stack",
+    "title": "Technologies We Use",
+    "hint": "Click any technology to learn how we use it",
+    "selectHint": "Select a technology to see details",
+    "useCases": "Use cases"
   },
   "menu": {
     "mobileApps": "Mobile Apps",

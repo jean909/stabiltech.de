@@ -118,7 +118,8 @@
     "tagline": "Expertiza noastră",
     "title": "Excelență tehnică",
     "description": "Ani de experiență combinați cu tehnologie de ultimă generație pentru rezultate excepționale.",
-    "visual": "Dezvoltare la nivel de expert"
+    "visual": "Dezvoltare la nivel de expert",
+    "uiDesign": "UI/UX Design"
   },
   "process": {
     "tagline": "Cum lucrăm",
@@ -135,6 +136,13 @@
   "testimonials": {
     "tagline": "Recenzii",
     "title": "Ce spun clienții"
+  },
+  "techOrbit": {
+    "subtitle": "Stack tehnic",
+    "title": "Tehnologii pe care le folosim",
+    "hint": "Apasă pe o tehnologie pentru a afla cum o folosim",
+    "selectHint": "Selectează o tehnologie pentru detalii",
+    "useCases": "Cazuri de utilizare"
   },
   "menu": {
     "mobileApps": "Aplicații mobile",
